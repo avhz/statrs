@@ -51,6 +51,12 @@ impl DiscreteUniform {
     }
 }
 
+impl std::fmt::Display for DiscreteUniform {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Uni([{}, {}])", self.min, self.max)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for DiscreteUniform {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         rng.gen_range(self.min..=self.max) as f64

@@ -12,7 +12,7 @@ use std::f64;
 /// # Examples
 ///
 /// ```
-/// 
+///
 /// use statrs::distribution::{Categorical, Discrete};
 /// use statrs::statistics::Distribution;
 /// use statrs::prec;
@@ -74,6 +74,12 @@ impl Categorical {
 
     fn cdf_max(&self) -> f64 {
         *self.cdf.last().unwrap()
+    }
+}
+
+impl std::fmt::Display for Categorical {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Cat({:#?})", self.norm_pmf)
     }
 }
 

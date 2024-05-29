@@ -79,6 +79,12 @@ impl Laplace {
     }
 }
 
+impl std::fmt::Display for Laplace {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Laplace({}, {})", self.location, self.scale)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Laplace {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         let x: f64 = rng.gen_range(-0.5..0.5);

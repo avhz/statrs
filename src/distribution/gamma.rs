@@ -86,6 +86,12 @@ impl Gamma {
     }
 }
 
+impl std::fmt::Display for Gamma {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Γ({}, {})", self.shape, self.rate)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Gamma {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         sample_unchecked(rng, self.shape, self.rate)

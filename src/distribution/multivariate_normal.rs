@@ -113,6 +113,12 @@ impl MultivariateNormal {
     }
 }
 
+impl std::fmt::Display for MultivariateNormal {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "N({}, {})", &self.mu, &self.cov)
+    }
+}
+
 impl ::rand::distributions::Distribution<DVector<f64>> for MultivariateNormal {
     /// Samples from the multivariate normal distribution
     ///

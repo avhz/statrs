@@ -80,6 +80,12 @@ impl Bernoulli {
     }
 }
 
+impl std::fmt::Display for Bernoulli {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Bernoulli({})", self.p())
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Bernoulli {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         rng.gen_bool(self.p()) as u8 as f64

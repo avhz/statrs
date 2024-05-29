@@ -71,6 +71,12 @@ impl Normal {
     }
 }
 
+impl std::fmt::Display for Normal {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "N({},{})", self.mean, self.std_dev)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Normal {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         sample_unchecked(rng, self.mean, self.std_dev)
@@ -309,7 +315,6 @@ pub fn ln_pdf_unchecked(x: f64, mean: f64, std_dev: f64) -> f64 {
 pub fn sample_unchecked<R: Rng + ?Sized>(rng: &mut R, mean: f64, std_dev: f64) -> f64 {
     mean + std_dev * ziggurat::sample_std_normal(rng)
 }
-
 
 impl std::default::Default for Normal {
     /// Returns the standard normal distribution with a mean of 0

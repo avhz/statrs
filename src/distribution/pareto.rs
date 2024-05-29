@@ -83,6 +83,12 @@ impl Pareto {
     }
 }
 
+impl std::fmt::Display for Pareto {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Pareto({},{})", self.scale, self.shape)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Pareto {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         // Inverse transform sampling

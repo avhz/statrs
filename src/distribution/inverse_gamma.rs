@@ -87,6 +87,12 @@ impl InverseGamma {
     }
 }
 
+impl std::fmt::Display for InverseGamma {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Inv-Gamma({}, {})", self.shape, self.rate)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for InverseGamma {
     fn sample<R: Rng + ?Sized>(&self, r: &mut R) -> f64 {
         1.0 / super::gamma::sample_unchecked(r, self.shape, self.rate)

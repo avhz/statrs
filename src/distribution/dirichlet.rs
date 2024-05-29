@@ -137,6 +137,12 @@ impl Dirichlet {
     }
 }
 
+impl std::fmt::Display for Dirichlet {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Dir({}, {})", self.alpha.len(), &self.alpha)
+    }
+}
+
 impl ::rand::distributions::Distribution<DVector<f64>> for Dirichlet {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> DVector<f64> {
         let mut sum = 0.0;

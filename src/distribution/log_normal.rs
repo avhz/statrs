@@ -55,6 +55,12 @@ impl LogNormal {
     }
 }
 
+impl std::fmt::Display for LogNormal {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "LogNormal({}, {}^2)", self.location, self.scale)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for LogNormal {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         super::normal::sample_unchecked(rng, self.location, self.scale).exp()

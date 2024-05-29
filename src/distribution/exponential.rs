@@ -67,6 +67,12 @@ impl Exp {
     }
 }
 
+impl std::fmt::Display for Exp {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Exp({})", self.rate)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Exp {
     fn sample<R: Rng + ?Sized>(&self, r: &mut R) -> f64 {
         ziggurat::sample_exp_1(r) / self.rate

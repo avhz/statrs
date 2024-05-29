@@ -59,6 +59,12 @@ impl Triangular {
     }
 }
 
+impl std::fmt::Display for Triangular {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Triangular([{},{}], {})", self.min, self.max, self.mode)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Triangular {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         sample_unchecked(rng, self.min, self.max, self.mode)

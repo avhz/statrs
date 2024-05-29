@@ -104,6 +104,12 @@ impl StudentsT {
     }
 }
 
+impl std::fmt::Display for StudentsT {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "t_{}({},{})", self.freedom, self.location, self.scale)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for StudentsT {
     fn sample<R: Rng + ?Sized>(&self, r: &mut R) -> f64 {
         // based on method 2, section 5 in chapter 9 of L. Devroye's

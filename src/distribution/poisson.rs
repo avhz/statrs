@@ -66,6 +66,12 @@ impl Poisson {
     }
 }
 
+impl std::fmt::Display for Poisson {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Pois({})", self.lambda)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Poisson {
     /// Generates one sample from the Poisson distribution either by
     /// Knuth's method if lambda < 30.0 or Rejection method PA by

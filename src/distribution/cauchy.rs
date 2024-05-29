@@ -79,6 +79,12 @@ impl Cauchy {
     }
 }
 
+impl std::fmt::Display for Cauchy {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Cauchy({}, {})", self.location, self.scale)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Cauchy {
     fn sample<R: Rng + ?Sized>(&self, r: &mut R) -> f64 {
         self.location + self.scale * (f64::consts::PI * (r.gen::<f64>() - 0.5)).tan()

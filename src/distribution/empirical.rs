@@ -151,6 +151,29 @@ impl Empirical {
     }
 }
 
+impl std::fmt::Display for Empirical {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut i = 0;
+        write!(f, "Empirical([")?;
+
+        'outer: for (val, &count) in self.data.iter() {
+            for _ in 0..count {
+                match i {
+                    0 => write!(f, "{}", &val.0)?,
+                    5 => {
+                        write!(f, ", ...")?;
+                        break 'outer;
+                    }
+                    _ => write!(f, ", {}", &val.0)?,
+                }
+                i += 1;
+            }
+        }
+
+        write!(f, "])")
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Empirical {
     fn sample<R: ?Sized + Rng>(&self, rng: &mut R) -> f64 {
         let uniform = Uniform::new(0.0, 1.0).unwrap();
@@ -203,6 +226,10 @@ impl ContinuousCDF<f64, f64> for Empirical {
             sum += values;
         }
         sum as f64 / self.sum
+    }
+
+    fn inverse_cdf(&self, p: f64) -> f64 {
+        self.__inverse_cdf(p)
     }
 }
 
@@ -263,5 +290,18 @@ mod tests {
         // because of rounding errors, this doesn't hold in general
         // due to the mean and variance being calculated in a streaming way
         assert_eq!(unchanged, empirical);
+    }
+
+    #[test]
+    fn test_nada() {
+        let data = vec![0., 1., 2., 3.];
+        let mut e = Empirical::from_vec(data);
+        println!("{}", e);
+        e.add(4.);
+        println!("{}", e);
+        e.add(4.);
+        println!("{}", e);
+        e.add(4.);
+        println!("{}", e);
     }
 }

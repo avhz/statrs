@@ -96,6 +96,12 @@ impl ChiSquared {
     }
 }
 
+impl std::fmt::Display for ChiSquared {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "χ^2_{}", self.freedom)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for ChiSquared {
     fn sample<R: Rng + ?Sized>(&self, r: &mut R) -> f64 {
         ::rand::distributions::Distribution::sample(&self.g, r)

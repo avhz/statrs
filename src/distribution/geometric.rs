@@ -68,6 +68,12 @@ impl Geometric {
     }
 }
 
+impl std::fmt::Display for Geometric {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Geom({})", self.p)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Geometric {
     fn sample<R: Rng + ?Sized>(&self, r: &mut R) -> f64 {
         if ulps_eq!(self.p, 1.0) {

@@ -87,6 +87,12 @@ impl Binomial {
     }
 }
 
+impl std::fmt::Display for Binomial {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Bin({},{})", self.p, self.n)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Binomial {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         (0..self.n).fold(0.0, |acc, _| {

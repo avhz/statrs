@@ -68,6 +68,12 @@ impl Chi {
     }
 }
 
+impl std::fmt::Display for Chi {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "χ_{}", self.freedom)
+    }
+}
+
 impl ::rand::distributions::Distribution<f64> for Chi {
     fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> f64 {
         (0..self.freedom as i64)
